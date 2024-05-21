@@ -9,15 +9,18 @@ body {
 }
 
 .navbar {
+    display: flex;
     height: 5rem;
     background-color: white;
+}
+.collapse {
+    background-color: white !important;
 }
 
 /* footer  */
 .fa-compass {
     color: #fe424d;
     font-size: 2rem;
-    ;
 }
 
 

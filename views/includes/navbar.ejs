@@ -6,6 +6,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div  class="navbar-nav">
+                
                 <a class="nav-link" href="/items">All Item</a>
                 
                 
@@ -21,12 +22,7 @@
                 
                 
             </div>
-            <div class="navbar-nav ms-auto">
-                <form class="d-flex" role="search" method="GET" action="/items/search">
-                    <input class="form-control me-2" name="keyword" type="search" placeholder="Tell us what you want" aria-label="Search" >
-                    <button class="btn btn-outline-danger"  type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-                  </form>
-            </div>
+            
             <div class="navbar-nav ms-auto">
                 <% if(!currUser){ %>
                     <a class="nav-link " href="/signup"><b>Sign Up</b></a>
