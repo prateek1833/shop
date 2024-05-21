@@ -1,0 +1,78 @@
+<% layout('../layout/boilerplate') -%>
+
+    <style>
+        #filters {
+            display: flex;
+            flex-wrap: wrap;
+            text-align: center;
+            align-items: center;
+        }
+
+        .filter {
+            text-align: center;
+            margin: 1rem;
+            margin-bottom: 0;
+            opacity: 0.8;
+        }
+
+        .filter:hover {
+            opacity: 1;
+        }
+
+        @media screen and (max-width: 389px) {
+            .filter{
+                margin: 0.2rem;
+            }
+
+            i{
+                font-size: medium;
+            }
+        }
+    </style>
+    <div id="filters" >
+        <a class="filter nav-link" href="/items/hardware">
+            <div><i style="font-size: 1.6rem;" class="fa-solid fa-gear" ></i></div>
+            <p>Hardware</p>
+        </a>
+        <a class="filter nav-link" href="/items/clothes">
+            <div><i style="font-size: 1.6rem;" class="fa-solid fa-shirt"></i></div>
+            <p>Cloths</p>
+        </a>
+        <a class="filter nav-link" href="/items/accessories">
+            <div><i style="font-size: 1.6rem;" class="fa-solid fa-hammer"></i></div>
+            <p>Accessories</p>
+        </a>
+        <a class="filter nav-link" href="/items/paints">
+            <div><i style="font-size: 1.6rem;" class="fa-solid fa-brush"></i></div>
+            <p>Paints</p>
+        </a>
+        <a class="filter nav-link" href="/items/grocery">
+            <div><i style="font-size: 1.6rem;" class="fa-solid fa-cookie-bite"></i></div>
+            <p>Grocery</p>
+        </a>
+    </div>
+    <hr>
+    <%if(!allItem){%>
+        <p>No Item found</p>
+        <%}%>
+    <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 ">
+        <%for(let item of allItem){%>
+            <div class="card" style="width: 18rem">
+                <a href="/items/<%=item._id%>/show.ejs" class="item-link">
+                    <img src="<%=item.image.url%>" class="card-img-top" alt="item_img" style="height: 20rem">
+                    <div class="card-img-overlay">
+                        <%=item.description%>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <b>
+                                <%=item.title%>
+                            </b>
+                            <br>
+                            Price: &#8377;<%= item.detail[0].price.toLocaleString("en-In") %>/<%= item.unit %>
+                        </p>
+                </a>
+            </div>
+    </div>
+    <%}%>
+        </div>

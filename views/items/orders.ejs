@@ -1,0 +1,86 @@
+<% layout('../layout/boilerplate') -%>
+
+<% for(let order of allOrder) { %>
+    <hr>
+    <% let user = order.author %>
+    
+    <ul class="list-group list-group-horizontal">
+        <li class="list-group-item"><%= user.name %></li>
+        <li class="list-group-item"><%= user.address %></li>
+        <li class="list-group-item"><%= user.distance %>km</li>
+        <li class="list-group-item"><%= user.mobile %></li>
+        <li class="list-group-item"><i class="fa-regular fa-circle-xmark"></i></li>
+      </ul>
+
+    <table class="table table-primary">
+        <thead class="thead-primary">
+            <tr>
+                <th>Item</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Rate</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% let sum = 0; %>
+            <% for (let orderItem of order.items) { %>
+                <tr>
+                    <td><%= orderItem.item.title %></td>
+                    <td><%= orderItem.item.typ %></td>
+                    <td><%= orderItem.item.price.toLocaleString("en-In") %>/<%= orderItem.item.unit %></td>
+                    <td>
+                        <%= orderItem.item.quantity.toLocaleString("en-In") %>
+                    </td>
+                    <td><%= (orderItem.item.quantity * orderItem.item.price).toLocaleString("en-In") %></td>
+                </tr>
+                <% sum += orderItem.item.quantity * orderItem.item.price; %>
+            <% } %>
+            <tr>
+                <td><b>Transport Charge</b></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b><%= ((user.distance * 2).toFixed(2)).toLocaleString("en-In") %></b></td>
+            </tr>
+            <tr>
+                <td><b>Balance Due</b></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b><%= user.balance_due.toLocaleString("en-In") %></b></td>
+            </tr>
+            <tr>
+                <td><b>Total</b></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b><%= ((sum + user.balance_due + (user.distance * 2)).toFixed(2)).toLocaleString("en-In") %></b></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    
+    <div class="d-grid gap-2 col-12 mx-auto">
+        <form method="POST" action="/owner/<%= order._id %>/status">
+            <div class="form-floating mb-1 ">
+                <select class="form-select" id="floatingSelect" name="orderStatus" aria-label="Floating label select example">
+                  <option selected><%= order.status %></option>
+                  <option value="1">Order Processing</option>
+                  <option value="2">Shipped</option>
+                  <option value="3">Out for Delivery</option>
+                  <option value="4">Delivered</option>
+                </select>
+                <label for="floatingSelect">Order Status</label>
+              </div>
+            <button type="submit" class="btn btn-success">Update Status</button>
+        </form>
+        <div class="d-grid gap-2 col-12 mx-auto">
+            <form method="get" action="/owner/<%= order._id %>/quantity">
+                <button type="submit" class="btn btn-primary">Update Quantity</button>
+            </form>
+        </div>
+    </div>
+    
+    <br>
+<% } %>

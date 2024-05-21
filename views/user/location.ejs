@@ -1,0 +1,35 @@
+<% layout('../layout/boilerplate') -%>
+    <script>
+        const mapToken = "<%=process.env.MAP_TOKEN%>"
+        const coordinate = "<%=currUser.geometry.coordinates%>"
+    </script>
+
+
+
+    <div class="card col-md-6 offset-md-2 col-12">
+        <h3>Your Location</h3>
+        <script
+            src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.3.1/mapbox-gl-directions.js"></script>
+        <link rel="stylesheet"
+            href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.3.1/mapbox-gl-directions.css"
+            type="text/css">
+        <div id="map">
+        </div>
+        <br>
+        <h2>
+            <div id="distance">
+            </div>
+            <div id="duration" style="color: green;">
+            </div>
+        </h2>
+
+        <br>
+        <div class="continue">
+            <form method="post" action="/order/checkout">
+                <button class="btn btn-success">Continue</button>
+            </form>
+        </div>
+
+
+    </div>
+    <script src="/js/map.js"></script>

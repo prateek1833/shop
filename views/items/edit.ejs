@@ -1,0 +1,37 @@
+<% layout('../layout/boilerplate') -%>
+
+    <div class="row">
+        <div class="col-8 offset-2">     
+            
+            <br>
+            <form method="POST" action="/items/<%=item._id%>/edit?_method=PUT" novalidate class="needs-validation"
+                enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" name="title" value="<%=item.title%>" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">description</label>
+                    <input type="text" name="description" value="<%=item.description%>" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">category</label>
+                    <input type="text" name="category" value="<%=item.category%>" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <img src="<%=originalImageUrl%>">
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Upload new Image</label>
+                    <input type="file" name="image" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="number" name="price" value="<%=item.price%>" class="form-control" required>
+                </div>
+
+                <button class="btn btn-dark add-btn">Submit</button>
+            </form>
+            <br>
+        </div>
+    </div>
