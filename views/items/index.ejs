@@ -52,10 +52,12 @@
         </a>
     </div>
     <hr>
-    <%if(!allItem){%>
-        <p>No Item found</p>
+    <%if(allItem.length==0){%>
+        <h2 style="opacity: 0.5;">Sorry! I don't have Grocery Shop</h2>
         <%}%>
+    
     <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 ">
+        
         <%for(let item of allItem){%>
             <div class="card" style="width: 18rem">
                 <a href="/items/<%=item._id%>/show.ejs" class="item-link">
