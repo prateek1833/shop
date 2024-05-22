@@ -126,23 +126,33 @@ module.exports.renderEdit = async (req, res) => {
 
 module.exports.update = async (req, res) => {
     const { id } = req.params;
-    let { title, description, price,category } = req.body;
+    const { title, description, category, unit, detail, key } = req.body;
 
+    // Convert key from a comma-separated string to an array
+    const keywords = key.split(',').map(keyword => keyword.trim());
+
+    // Find and update the item
     let item = await Item.findByIdAndUpdate(id, {
         title,
         description,
-        price,
         category,
-    })
-    if (typeof req.file != "undefined") {
+        unit,
+        detail,  // Assuming detail is correctly formatted as an array of objects { price, typ }
+        key: keywords,
+    }, { new: true });  // The { new: true } option returns the updated document
+
+    // Handle image upload
+    if (req.file) {
         let url = req.file.path;
         let filename = req.file.filename;
-        item.image= { url, filename };
+        item.image = { url, filename };
         await item.save();
     }
-    req.flash("success", " Item Updated");
+
+    req.flash("success", "Item Updated");
     res.redirect(`/items/${id}/show.ejs`);
-}
+};
+
 
 module.exports.destroyItem = async (req, res) => {
     let { id } = req.params;
