@@ -96,9 +96,7 @@ module.exports.destroyFromCart = async (req, res) => {
     }
 };
 
-module.exports.updateLocation=async(req,res)=>{
-    
-}
+
 
 module.exports.createOrder = async (req, res) => {
     try {

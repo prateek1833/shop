@@ -22,8 +22,6 @@ router.get("/checkout", isLoggedIn, async (req, res) => {
     res.render('user/checkout.ejs', { order: order});
 })
 
-router
-.post("/updateLocation",(orderController.updateLocation));
 
 router
 .post("/checkout",isLoggedIn, (orderController.createOrder));
