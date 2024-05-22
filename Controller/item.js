@@ -18,6 +18,14 @@ module.exports.indexAccessories = async (req, res) => {
     const allItem = await Item.find({ category: "Accessories" });
     res.render("items/index.ejs", { allItem });
 }
+module.exports.indexPaint = async (req, res) => {
+    const allItem = await Item.find({ category: "Paint" });
+    res.render("items/index.ejs", { allItem });
+}
+module.exports.indexGrocery = async (req, res) => {
+    const allItem = await Item.find({ category: "Grocery" });
+    res.render("items/index.ejs", { allItem });
+}
 module.exports.search = async (req, res) => {
     const keyword = req.query.keyword; // Assuming keyword is sent in the query parameters
     console.log(keyword);
