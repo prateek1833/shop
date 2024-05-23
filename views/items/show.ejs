@@ -1,5 +1,101 @@
 <% layout('../layout/boilerplate') -%>
 
+<style>
+    .show-img {
+        border-radius: 10px 10px 0 0;
+        height: 20rem;
+        object-fit: cover;
+    }
+
+    .card {
+        margin-bottom: 1.5rem;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .card-body {
+        padding: 15px;
+        text-align: center;
+    }
+
+    .card-text {
+        font-size: 1rem;
+        color: #333;
+    }
+
+    .card-text b {
+        font-size: 1.2rem;
+        color: #ff4e50;
+    }
+
+    .add-btn {
+        width: 120px;
+        background-color: #ff4e50;
+        border-color: #ff4e50;
+    }
+
+    .add-btn:hover {
+        background-color: #ff3b3f;
+        border-color: #ff3b3f;
+    }
+
+    .starability-growRotate .input-no-rate:checked~label,
+    .starability-growRotate .input-no-rate:checked~label~label,
+    .starability-growRotate .input-no-rate:checked~label~label~label,
+    .starability-growRotate .input-no-rate:checked~label~label~label~label,
+    .starability-growRotate .input-no-rate:checked~label~label~label~label~label {
+        color: #bbb;
+    }
+
+    .btn-dark {
+        background-color: #ff4e50;
+        border-color: #ff4e50;
+    }
+
+    .btn-dark:hover {
+        background-color: #ff3b3f;
+        border-color: #ff3b3f;
+    }
+
+    .form-label {
+        font-weight: bold;
+    }
+
+    .invalid-feedback {
+        color: #ff4e50;
+    }
+
+    h3, h4 {
+        color: #ff4e50;
+        font-weight: bold;
+    }
+
+    hr {
+        border: 0;
+        height: 1px;
+        background: #ff4e50;
+        background-image: linear-gradient(to right, #ff4e50, #f9d423);
+        margin: 20px 0;
+    }
+
+    .review-card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .review-card .card-body {
+        padding: 10px;
+    }
+
+    .review-card .card-title {
+        color: #ff4e50;
+        font-weight: bold;
+    }
+</style>
+
 <div class="row mt-3">
     <div class="col-md-8 offset-md-2">
         <h3>Item Details of <%=item.title%></h3>
