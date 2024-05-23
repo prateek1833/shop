@@ -30,7 +30,7 @@
                                     <%= orderItem.detail.price.toLocaleString("en-In") %>/<%= orderItem.unit %>
                                 </td>
                                 <td>
-                                    <%= orderItem.quantity.toLocaleString("en-In") %>
+                                    <%= orderItem.quantity.toLocaleString("en-In") %><%= orderItem.item.unit %>
                                 </td>
                                 <td>
                                     <%= (orderItem.quantity * orderItem.detail.price).toLocaleString("en-In") %>
