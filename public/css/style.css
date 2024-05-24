@@ -18,12 +18,26 @@ body {
 }
 
 /* footer  */
-.fa-compass {
+.fa-unity {
     color: #fe424d;
-    font-size: 2rem;
+    font-size: 3rem;
 }
 
+@media screen and (max-width: 500px) {
+    .filter {
+        margin: 0.2rem;
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
 
+    .filter i {
+        font-size: medium;
+    }
+    .row{
+        justify-content: center;
+    }
+
+}
 
 .nav-link {
     color: #222222 !important;

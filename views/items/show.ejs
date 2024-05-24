@@ -31,7 +31,7 @@
     }
 
     .add-btn {
-        width: 120px;
+        /* width: 120px; */
         background-color: #ff4e50;
         border-color: #ff4e50;
     }
@@ -108,24 +108,25 @@
             <p class="card-text"><b><%=item.title%></b></p>
             <p class="card-text"><%=item.description%></p>
             <form method="POST" action="/order">
-                <div class="d-flex flex-wrap">
+                <div class="d-flex flex-wrap justify-content-center">
                     <% item.detail.forEach((detail, index) => { %>
-                        <div class="me-2 mb-2">
+                        <div class="me-2 mb-2 ">
                             <input type="radio" class="btn-check" id="type<%= index %>" name="selectedType" value="<%= index %>" <% if (index === 0) { %>checked<% } %>>
                             <label class="btn btn-outline-danger" for="type<%= index %>"><%= detail.typ %> &#8377;<%= detail.price.toLocaleString("en-In") %>/<%= item.unit %></label>
                         </div>
                     <% }) %>
                 </div>
-                <div class="mb-3">
-                    <label for="quantity" class="form-label"></label>
-                    <input type="number" placeholder="Enter Quantity in <%=item.unit%>" name="quantity" class="form-control" required>
-                    <p>(in <%=item.unit%>)</p>
+                <div class="mb-3 d-flex ">
+                    <label for="quantity" class="form-label me-2 col-5">Enter Quantity in <%=item.unit%> :</label>
+                    <input type="number" placeholder="Enter Quantity in <%=item.unit%>" name="quantity" value="1" class="form-control" required >
                 </div>
                 <div class="mb-3" hidden>
                     <label for="item" class="form-label"></label>
                     <input type="text" name="item" value="<%= item._id %>" class="form-control" required>
                 </div>
-                <button type="submit" class="btn btn-dark add-btn" style="width: 120px;">Add to Cart</button>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button type="submit" class="btn btn-dark add-btn" >Add to Cart</button>
+                </div>
             </form>
         </div>
         <br>
