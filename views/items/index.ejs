@@ -3,7 +3,7 @@
 <style>
     #filters {
         display: flex;
-        justify-content: center;
+        justify-content: left;
         align-items: center;
         flex-wrap: nowrap;
         margin: 20px 0;
@@ -13,6 +13,7 @@
 
     .filter {
         text-align: center;
+        margin-right: 0.5rem;
         padding: 10px 20px;
         border: 2px solid #ff4e50;
         border-radius: 25px;
@@ -33,10 +34,9 @@
 
     .filter i {
         font-size: 1.6rem;
-        margin-bottom: 5px;
     }
 
-    @media screen and (max-width: 389px) {
+    @media screen and (max-width: 400px) {
         .filter {
             margin: 0.2rem;
             padding: 5px 10px;
@@ -45,6 +45,9 @@
 
         .filter i {
             font-size: medium;
+        }
+        .row{
+            justify-content: center;
         }
 
     }
@@ -99,7 +102,6 @@
         margin: 20px 0;
     }
 </style>
-    </style>
     <div id="filters" >
         <a class="filter nav-link" href="/items/hardware">
             <div><i style="font-size: 1.6rem;" class="fa-solid fa-gear" ></i></div>
