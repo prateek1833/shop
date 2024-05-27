@@ -124,11 +124,19 @@
                     <label for="item" class="form-label"></label>
                     <input type="text" name="item" value="<%= item._id %>" class="form-control" required>
                 </div>
+                <% if(currUser) {%>
                 <div class="d-grid gap-2 col-6 mx-auto">
                     <button type="submit" class="btn btn-dark add-btn">Add to Cart</button>
                 </div>
+                <% } %>
+                <% if(!currUser) { %>
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button type="submit" class="btn btn-dark add-btn" disabled>Add to Cart</button>
+                    </div>
+                <% } %>                
             </form>
             
+            <% if(currUser) {%>
             <form method="POST" action="/order/<%=currUser._id%>/buy" id="buyNowForm">
                 <input type="text" name="item" value="<%= item._id %>" hidden>
                 <input type="text" name="selectedType" id="selectedTypeBuyNow" value="<%= item.detail[0].typ %>" hidden>
@@ -137,6 +145,12 @@
                     <button type="submit" class="btn btn-warning buy-btn">Buy Now</button>
                 </div>
             </form>
+            <% } %>
+            <% if(!currUser) { %>
+                <div class="d-grid gap-2 col-6 mx-auto mt-2">
+                    <button type="submit" class="btn btn-warning buy-btn" disabled>Buy Now</button>
+                    <p><a href="/login"><b>Log in</b></a> to buy this item.</p>                </div>
+            <% } %> 
         </div>
         <br>
 
