@@ -201,15 +201,17 @@
             <p><b>All Reviews</b></p>
             <div class="row">
                 <% item.reviews.forEach(review => { %>
-                    <div class="card col-5 ms-3 mb-3 review-card">
+                    <div class="card col-5 ms-3 mb-3 review-card ">
                         <div class="card-body">
                             <h5 class="card-title"><%=review.author.username%></h5>
-                            <p class="starability-result card-text" data-rating="<%=review.rating%>"></p>
+                            <p class="starability-result card-text justify-content-center" data-rating="<%=review.rating%>"></p>
                             <p class="card-text"><%=review.comment%></p>
                         </div>
+                        <% if(currUser && review.author.username==currUser.username) { %>
                         <form class="mb-3" method="POST" action="/items/<%=item._id%>/reviews/<%=review._id%>?_method=DELETE">
                             <button class="btn btn-sm btn-dark">Delete</button>
                         </form>
+                        <% } %>
                     </div>
                     <br>
                 <% }) %>
