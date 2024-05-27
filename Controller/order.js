@@ -56,6 +56,57 @@ module.exports.addToCart = async (req, res) => {
     }
 };
 
+module.exports.buy = async (req, res) => {
+    try {
+        console.log(req.body);
+        console.log(req.params);
+        const item = await Item.findById(req.body.item);
+        const userId = req.params.id;
+
+        // Extract the selected type and quantity from the request body
+        const selectedTypeIndex = req.body.selectedType;
+        const quantity = parseInt(req.body.quantity, 10);
+
+        // Check if the item exists
+        if (!item) {
+            return res.status(404).send("Item not found");
+        }
+
+        // Find the selected type from the item's detail array
+        const selectedDetail = item.detail[selectedTypeIndex];
+
+        // Check if the selected type exists
+        if (!selectedDetail) {
+            return res.status(404).send("Selected type not found");
+        }
+
+        // Create the new order with the selected type and quantity
+        const newOrder = {
+            title: item.title,
+            category: item.category,
+            unit: item.unit,
+            detail: selectedDetail,
+            quantity: quantity,
+            id: item._id
+        };
+
+        // Get the current order array from the cookie, or initialize it as an empty array if it doesn't exist
+        let orders = req.cookies.order ? JSON.parse(req.cookies.order) : [];
+
+        // Add the new order to the array
+        orders.push(newOrder);
+
+        // Set the cookie with the updated order array
+        res.cookie("order", JSON.stringify(orders));
+
+        // Redirect to the user's location page
+        res.redirect(`/order/${userId}/location`);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
+};
 
 module.exports.destroyFromCart = async (req, res) => {
     try {
@@ -71,6 +122,7 @@ module.exports.destroyFromCart = async (req, res) => {
         // Extract the orderItem ID from the request body
         const orderItemId = req.body.orderItem;
 
+        let id=req.params;
 
         // Find the index of the orderItem in the orders array
         const index = order.findIndex(order => order.id == orderItemId);
@@ -87,7 +139,7 @@ module.exports.destroyFromCart = async (req, res) => {
         res.cookie("order", JSON.stringify(order));
 
         // Redirect back to the cart view or any other appropriate page
-        res.render('user/cart.ejs', { order: order });// You might need to change this URL based on your application's routes
+        res.render('user/cart.ejs', { order: order,id });// You might need to change this URL based on your application's routes
 
     } catch (error) {
         // Handle any errors that occur during the process

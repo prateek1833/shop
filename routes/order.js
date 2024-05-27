@@ -12,7 +12,7 @@ const orderController=require("../Controller/order.js")
 router
 .post("/",isLoggedIn, wrapAsync(orderController.addToCart));
 
-router.delete("/delete",isLoggedIn, wrapAsync(orderController.destroyFromCart));
+router.delete("/:id/delete",isLoggedIn, wrapAsync(orderController.destroyFromCart));
 
 router.get("/:id/location", isLoggedIn, async (req, res) => {
     res.render('user/location.ejs');
@@ -25,5 +25,8 @@ router.get("/checkout", isLoggedIn, async (req, res) => {
 
 router
 .post("/checkout",isLoggedIn, (orderController.createOrder));
+
+router
+.post("/:id/buy",isLoggedIn, (orderController.buy));
 
 module.exports=router;

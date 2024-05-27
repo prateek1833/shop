@@ -31,7 +31,6 @@
     }
 
     .add-btn {
-        /* width: 120px; */
         background-color: #ff4e50;
         border-color: #ff4e50;
     }
@@ -107,25 +106,35 @@
         <div class="card-body">
             <p class="card-text"><b><%=item.title%></b></p>
             <p class="card-text"><%=item.description%></p>
-            <form method="POST" action="/order">
+           
+            <form method="POST" action="/order" id="addToCartForm">
                 <div class="d-flex flex-wrap justify-content-center">
                     <% item.detail.forEach((detail, index) => { %>
-                        <div class="me-2 mb-2 ">
+                        <div class="me-2 mb-2">
                             <input type="radio" class="btn-check" id="type<%= index %>" name="selectedType" value="<%= index %>" <% if (index === 0) { %>checked<% } %>>
                             <label class="btn btn-outline-danger" for="type<%= index %>"><%= detail.typ %> &#8377;<%= detail.price.toLocaleString("en-In") %>/<%= item.unit %></label>
                         </div>
                     <% }) %>
                 </div>
-                <div class="mb-3 d-flex ">
+                <div class="mb-3 d-flex">
                     <label for="quantity" class="form-label me-2 col-5">Enter Quantity in <%=item.unit%> :</label>
-                    <input type="number" placeholder="Enter Quantity in <%=item.unit%>" name="quantity" value="1" class="form-control" required >
+                    <input type="number" placeholder="Enter Quantity in <%=item.unit%>" name="quantity" value="1" class="form-control" required>
                 </div>
                 <div class="mb-3" hidden>
                     <label for="item" class="form-label"></label>
                     <input type="text" name="item" value="<%= item._id %>" class="form-control" required>
                 </div>
                 <div class="d-grid gap-2 col-6 mx-auto">
-                    <button type="submit" class="btn btn-dark add-btn" >Add to Cart</button>
+                    <button type="submit" class="btn btn-dark add-btn">Add to Cart</button>
+                </div>
+            </form>
+            
+            <form method="POST" action="/order/<%=currUser._id%>/buy" id="buyNowForm">
+                <input type="text" name="item" value="<%= item._id %>" hidden>
+                <input type="text" name="selectedType" id="selectedTypeBuyNow" value="<%= item.detail[0].typ %>" hidden>
+                <input type="number" name="quantity" id="quantityBuyNow" value="1" hidden>
+                <div class="d-grid gap-2 col-6 mx-auto mt-2">
+                    <button type="submit" class="btn btn-warning buy-btn">Buy Now</button>
                 </div>
             </form>
         </div>
@@ -178,7 +187,7 @@
             <p><b>All Reviews</b></p>
             <div class="row">
                 <% item.reviews.forEach(review => { %>
-                    <div class="card col-5 ms-3 mb-3">
+                    <div class="card col-5 ms-3 mb-3 review-card">
                         <div class="card-body">
                             <h5 class="card-title"><%=review.author.username%></h5>
                             <p class="starability-result card-text" data-rating="<%=review.rating%>"></p>
@@ -194,3 +203,30 @@
         <% } %>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const addToCartForm = document.getElementById("addToCartForm");
+        const buyNowForm = document.getElementById("buyNowForm");
+        const selectedTypeBuyNow = document.getElementById("selectedTypeBuyNow");
+        const quantityBuyNow = document.getElementById("quantityBuyNow");
+
+        // Update the hidden fields in buyNowForm when the radio buttons change
+        addToCartForm.addEventListener("change", function(event) {
+            if (event.target.name === "selectedType") {
+                selectedTypeBuyNow.value = event.target.value;
+            }
+        });
+
+        // Update the hidden quantity in buyNowForm when quantity changes in addToCartForm
+        addToCartForm.querySelector('input[name="quantity"]').addEventListener('input', function(event) {
+            quantityBuyNow.value = event.target.value;
+        });
+
+        // Ensure selected type is updated on page load
+        const selectedTypeRadio = addToCartForm.querySelector('input[name="selectedType"]:checked');
+        if (selectedTypeRadio) {
+            selectedTypeBuyNow.value = selectedTypeRadio.value;
+        }
+    });
+</script>

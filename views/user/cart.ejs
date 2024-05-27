@@ -36,7 +36,7 @@
                                     <%= orderItem.quantity * orderItem.detail.price %>
                                 </td>
                                 <td>
-                                    <form method="POST" action="/order/delete?_method=DELETE">
+                                    <form method="POST" action="/order/<%=id%>/delete?_method=DELETE">
                                         <input type="hidden" name="orderItem" value="<%= orderItem.id %>">
                                         <button class="btn btn-dark" style="width: 40px;"><i class="fa-solid fa-trash"></i></button>
                                     </form>

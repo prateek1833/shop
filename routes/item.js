@@ -30,10 +30,7 @@ router.get("/:id/myOrders", wrapAsync(itemController.myOrders));
 router.get("/new", isLoggedIn, async (req, res) => {
     res.render("items/new.ejs");
 })
-router.get("/cart.ejs", isLoggedIn, async (req, res) => {
-    const order = req.cookies.order ? JSON.parse(req.cookies.order) : [];
-    res.render('user/cart.ejs', { order: order});
-})
+
 
 router.post("/new",isLoggedIn,upload.single('image'), wrapAsync(itemController.createItem));
 
