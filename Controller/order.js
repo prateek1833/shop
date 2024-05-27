@@ -91,7 +91,7 @@ module.exports.buy = async (req, res) => {
         };
 
         // Get the current order array from the cookie, or initialize it as an empty array if it doesn't exist
-        let orders = req.cookies.order ? JSON.parse(req.cookies.order) : [];
+        let orders = [];
 
         // Add the new order to the array
         orders.push(newOrder);
