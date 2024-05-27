@@ -8,7 +8,15 @@ const userSchema=new Schema({
         type:String,
         required: true,
     },
-    address:{
+    area:{
+        type:String,
+        required: true,
+    },
+    district:{
+        type:String,
+        required: true,
+    },
+    state:{
         type:String,
         required: true,
     },

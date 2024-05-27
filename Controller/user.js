@@ -19,14 +19,14 @@ module.exports.signup = async (req, res) => {
     try {
         let response = await geocodingClient
             .forwardGeocode({
-                query: req.body.address + ' ' + req.body.pincode,
+                query: req.body.area + ' '+req.body.district + ' '+req.body.state + ' ' + req.body.pincode,
                 limit: 2
             })
             .send()
         let userGeometry = response.body.features[0].geometry;
         const owner = "6638779c9bfc94fc81a42508";
-        let { username, address, pincode, mobile, password } = req.body;
-        const newUser = new User({ address, pincode, mobile, username, geometry: userGeometry, owner });
+        let { username, area, pincode, mobile, password, district, state } = req.body;
+        const newUser = new User({ area, pincode, district, state, mobile, username, geometry: userGeometry, owner });
         const registerUser = await User.register(newUser, password);
 
         // Coordinates of the shop (Assuming you have the shop's coordinates)
