@@ -28,34 +28,34 @@
                 <tr>
                     <td><%= orderItem.item.title %></td>
                     <td><%= orderItem.item.typ %></td>
-                    <td><%= orderItem.item.price.toLocaleString("en-In") %>/<%= orderItem.item.unit %></td>
+                    <td><%= orderItem.item.price.toLocaleString("en-In") %> &#8377;/<%= orderItem.item.unit %></td>
                     <td>
                         <%= orderItem.item.quantity.toLocaleString("en-In") %> <%= orderItem.item.unit %>
                     </td>
                     <td><%= (orderItem.item.quantity * orderItem.item.price).toLocaleString("en-In") %></td>
                 </tr>
-                <% sum += orderItem.item.quantity * orderItem.item.price; %>
+                <% sum += orderItem.item.quantity * orderItem.item.price  %> &#8377;
             <% } %>
             <tr>
                 <td><b>Transport Charge</b></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><b><%= ((user.distance * 2).toFixed(2)).toLocaleString("en-In") %></b></td>
+                <td><b><%= ((user.distance * 2).toFixed(2)).toLocaleString("en-In") %> &#8377;</b></td>
             </tr>
             <tr>
                 <td><b>Balance Due</b></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><b><%= user.balance_due.toLocaleString("en-In") %></b></td>
+                <td><b><%= user.balance_due.toLocaleString("en-In") %> &#8377;</b></td>
             </tr>
             <tr>
                 <td><b>Total</b></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><b><%= ((sum + user.balance_due + (user.distance * 2)).toFixed(2)).toLocaleString("en-In") %></b></td>
+                <td><b><%= ((sum + user.balance_due + (user.distance * 2)).toFixed(2)).toLocaleString("en-In") %> &#8377;</b></td>
             </tr>
         </tbody>
     </table>

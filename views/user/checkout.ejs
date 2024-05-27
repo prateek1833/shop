@@ -21,9 +21,9 @@
                     <tr>
                         <td><%= orderItem.title %></td>
                         <td><%= orderItem.detail.typ %></td>
-                        <td><%= orderItem.detail.price.toLocaleString("en-IN") %> / <%= orderItem.unit %></td>
+                        <td><%= orderItem.detail.price.toLocaleString("en-IN") %> &#8377; / <%= orderItem.unit %></td>
                         <td><%= orderItem.quantity.toLocaleString("en-IN") %> <%= orderItem.unit %></td>
-                        <td><%= (orderItem.quantity * orderItem.detail.price).toLocaleString("en-IN") %></td>
+                        <td><%= (orderItem.quantity * orderItem.detail.price).toLocaleString("en-IN") %> &#8377;</td>
                     </tr>
                     <% sum += orderItem.quantity * orderItem.detail.price; %>
                     <% weight += parseInt(orderItem.quantity); %>
@@ -33,14 +33,14 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><b><%= (user.distance * 2).toFixed(2).toLocaleString("en-IN") %></b></td>
+                    <td><b><%= (user.distance * 2).toFixed(2).toLocaleString("en-IN") %> &#8377;</b></td>
                 </tr>
                 <tr>
                     <td><b>Total</b></td>
                     <td></td>
                     <td></td>
                     <td><b></b></td>
-                    <td><b><%= (sum + (user.distance * 2)).toFixed(2).toLocaleString("en-IN") %></b></td>
+                    <td><b><%= (sum + (user.distance * 2)).toFixed(2).toLocaleString("en-IN") %> &#8377;</b></td>
                 </tr>
             <% } else { %>
                 <tr>

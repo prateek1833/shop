@@ -21,11 +21,11 @@
                 <tr>
                     <td><%= orderItem.item.title %></td>
                     <td><%= orderItem.item.typ %></td>
-                    <td><%= orderItem.item.price.toLocaleString("en-IN") %> / <%= orderItem.item.unit %></td>
+                    <td><%= orderItem.item.price.toLocaleString("en-IN") %> &#8377; / <%= orderItem.item.unit %></td>
                     <td><%= orderItem.item.quantity.toLocaleString("en-IN") %> <%= orderItem.item.unit %></td>
-                    <td><%= (orderItem.item.quantity * orderItem.item.price).toLocaleString("en-IN") %></td>
+                    <td><%= (orderItem.item.quantity * orderItem.item.price).toLocaleString("en-IN") %> &#8377;</td>
                 </tr>
-                <% sum += orderItem.item.quantity * orderItem.item.price; %>
+                <% sum += orderItem.item.quantity * orderItem.item.price; %> &#8377;
                 <% weight += parseInt(orderItem.item.quantity); %>
             <% } %>
             <tr>
@@ -33,21 +33,21 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><b><%= (user.distance * 2).toFixed(2).toLocaleString("en-IN") %></b></td>
+                <td><b><%= (user.distance * 2).toFixed(2).toLocaleString("en-IN") %> &#8377;</b></td>
             </tr>
             <tr>
                 <td><b>Balance Due</b></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><b><%= user.balance_due.toLocaleString("en-IN") %></b></td>
+                <td><b><%= user.balance_due.toLocaleString("en-IN") %> &#8377;</b></td>
             </tr>
             <tr>
                 <td><b>Total</b></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><b><%= (sum + user.balance_due + user.distance * 2).toFixed(2).toLocaleString("en-IN") %></b></td>
+                <td><b><%= (sum + user.balance_due + user.distance * 2).toFixed(2).toLocaleString("en-IN") %> &#8377;</b></td>
             </tr>
             
             <tr>

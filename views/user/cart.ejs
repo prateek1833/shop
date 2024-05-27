@@ -27,13 +27,13 @@
                                     <%= orderItem.detail.typ %>
                                 </td>
                                 <td>
-                                    <%= orderItem.detail.price %>/<%= orderItem.unit %>
+                                    <%= orderItem.detail.price %> &#8377;/<%= orderItem.unit %>
                                 </td>
                                 <td>
                                     <%= orderItem.quantity %> <%= orderItem.unit %>
                                 </td>
                                 <td>
-                                    <%= orderItem.quantity * orderItem.detail.price %>
+                                    <%= orderItem.quantity * orderItem.detail.price %> &#8377;
                                 </td>
                                 <td>
                                     <form method="POST" action="/order/<%=id%>/delete?_method=DELETE">
