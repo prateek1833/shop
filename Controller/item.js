@@ -60,7 +60,7 @@ module.exports.showItem = async (req, res) => {
     res.render("items/show.ejs", { item });
 }
 module.exports.orders = async (req, res) => {
-    const allOrder = await Orders.find({}).sort({ createdAt: -1 });
+    const allOrder = await Orders.find({});
     res.render("items/orders.ejs", { allOrder,User });
 }
 module.exports.myOrders = async (req, res, next) => {
