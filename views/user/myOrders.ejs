@@ -25,7 +25,7 @@
                     <td><%= orderItem.item.quantity.toLocaleString("en-IN") %> <%= orderItem.item.unit %></td>
                     <td><%= (orderItem.item.quantity * orderItem.item.price).toLocaleString("en-IN") %> &#8377;</td>
                 </tr>
-                <% sum += orderItem.item.quantity * orderItem.item.price; %> &#8377;
+                <% sum += orderItem.item.quantity * orderItem.item.price; %> 
                 <% weight += parseInt(orderItem.item.quantity); %>
             <% } %>
             <tr>
