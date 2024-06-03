@@ -93,12 +93,14 @@ module.exports.status = async (req, res) => {
 
 module.exports.update = async (req, res) => {
     const { id } = req.params;
-    let { address, pincode, balance_due, mobile } = req.body;
+    let { area, district, state, pincode, balance_due, mobile } = req.body;
     console.log(req.body);
 
     try {
         let user = await User.findByIdAndUpdate(id, {
-            address,
+            area,
+            district,
+            state,
             pincode,
             balance_due,
             mobile,
