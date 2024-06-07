@@ -112,7 +112,7 @@
                     <% item.detail.forEach((detail, index) => { %>
                         <div class="me-2 mb-2">
                             <input type="radio" class="btn-check" id="type<%= index %>" name="selectedType" value="<%= index %>" <% if (index === 0) { %>checked<% } %>>
-                            <label class="btn btn-outline-danger" for="type<%= index %>"><%= detail.typ %> &#8377;<%= detail.price.toLocaleString("en-In") %>/<%= item.unit %></label>
+                            <label class="btn btn-outline-danger" for="type<%= index %>"><%= detail.typ %>  |  <%= detail.price.toLocaleString("en-In") %>&#8377;/<%= item.unit %></label>
                         </div>
                     <% }) %>
                 </div>
