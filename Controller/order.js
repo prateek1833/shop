@@ -182,7 +182,10 @@ module.exports.createOrder = async (req, res) => {
             author: {
                 _id:user._id,
                 name: user.username,
-                address: user.address +", "+ user.pincode,
+                area: user.area,
+                district: user.district,
+                state: user.state,
+                pincode: user.pincode,
                 mobile: user.mobile,
                 distance:user.distance,
                 balance_due:user.balance_due,

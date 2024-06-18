@@ -30,7 +30,10 @@ const orderSchema = new Schema({
     author: {
         _id:String,
         name:String,
-        address:String,
+        area:String,
+        district:String,
+        state:String,
+        pincode:Number,
         mobile: Number,
         distance:Number,
         balance_due:Number,
