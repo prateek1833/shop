@@ -60,7 +60,8 @@ module.exports.status = async (req, res) => {
         // Validate that the orderStatus is one of the allowed values
         const validStatuses = ['1', '2', '3', '4'];
         if (!validStatuses.includes(orderStatus)) {
-            return res.status(400).send({ message: 'Invalid order status' });
+            req.flash("warning", "invalid order status");
+            res.render("items/orders.ejs", { allOrder,User });
         }
 
         // Update the order with the new status
@@ -81,7 +82,7 @@ module.exports.status = async (req, res) => {
             return res.status(404).send({ message: 'Order not found' });
         }
         req.flash("success", "status updated");
-        res.render("items/orders.ejs", { allOrder,User });
+        return res.render("items/orders.ejs", { allOrder,User });
         // Send the updated order back in the response
     } catch (error) {
         console.error('Error updating order status:', error);

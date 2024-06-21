@@ -64,7 +64,7 @@
     <div class="d-grid gap-2 col-12 mx-auto">
         <form method="POST" action="/owner/<%= order._id %>/status">
             <div class="form-floating mb-1 ">
-                <select class="form-select" id="floatingSelect" name="orderStatus" aria-label="Floating label select example">
+                <select class="form-select" id="floatingSelect_<%= order._id %>" name="orderStatus" aria-label="Floating label select example">
                   <option selected><%= order.status %></option>
                   <option value="1">Order Processing</option>
                   <option value="2">Shipped</option>
@@ -73,7 +73,7 @@
                 </select>
                 <label for="floatingSelect">Order Status</label>
               </div>
-            <button type="submit" class="btn btn-success">Update Status</button>
+            <button type="submit" class="btn btn-success" id="updateStatusBtn_<%= order._id %>">Update Status</button>
         </form>
         <div class="d-grid gap-2 col-12 mx-auto">
             <form method="get" action="/owner/<%= order._id %>/quantity">
@@ -84,3 +84,34 @@
     
     <br>
 <% } %>
+
+<script>
+   document.addEventListener('DOMContentLoaded', function () {
+    var selectBoxes = document.querySelectorAll(".form-select");
+    var updateButtons = document.querySelectorAll(".btn-success");
+
+    selectBoxes.forEach(function(selectBox) {
+        selectBox.addEventListener('change', function () {
+            toggleUpdateButton(selectBox);
+        });
+    });
+
+    function toggleUpdateButton(selectBox) {
+        var orderId = selectBox.id.split("_")[1];
+        var updateButton = document.getElementById("updateStatusBtn_" + orderId);
+
+        if (selectBox.value === "1" || selectBox.value === "2" || selectBox.value === "3" || selectBox.value === "4") {
+            updateButton.disabled = false;
+        } else {
+            updateButton.disabled = true;
+        }
+    }
+
+    // Call toggleUpdateButton for each select box initially
+    selectBoxes.forEach(function(selectBox) {
+        toggleUpdateButton(selectBox);
+    });
+});
+
+
+</script>
