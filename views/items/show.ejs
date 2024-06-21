@@ -30,6 +30,16 @@
         color: #ff4e50;
     }
 
+    .btn-outline-danger{
+        color:  #ff4e50;
+        border-color: #ff4e50;
+    }
+    .custom-radio:checked + .custom-label{
+    background-color: #ff4e50;
+    color: white;
+    border-color: #ff4e50;
+    }
+
     .add-btn {
         background-color: #ff4e50;
         border-color: #ff4e50;
@@ -107,12 +117,12 @@
             <p class="card-text"><b><%=item.title%></b></p>
             <p class="card-text"><%=item.description%></p>
            
-            <form method="POST" action="/order" id="addToCartForm">
-                <div class="d-flex flex-wrap justify-content-center">
+            <form method="POST" action="/order" id="addToCartForm" >
+                <div class="d-flex flex-wrap justify-content-center" >
                     <% item.detail.forEach((detail, index) => { %>
-                        <div class="me-2 mb-2">
-                            <input type="radio" class="btn-check" id="type<%= index %>" name="selectedType" value="<%= index %>" <% if (index === 0) { %>checked<% } %>>
-                            <label class="btn btn-outline-danger" for="type<%= index %>"><%= detail.typ %>  |  <%= detail.price.toLocaleString("en-In") %>&#8377;/<%= item.unit %></label>
+                        <div class="me-2 mb-2" >
+                            <input type="radio" class="btn-check custom-radio" id="type<%= index %>" name="selectedType" value="<%= index %>" <% if (index === 0) { %>checked<% } %>>
+                            <label class="btn btn-outline-danger custom-label" for="type<%= index %>"><%= detail.typ %>  |  <%= detail.price.toLocaleString("en-In") %>&#8377;/<%= item.unit %></label>
                         </div>
                     <% }) %>
                 </div>
@@ -131,7 +141,7 @@
                 <% } %>
                 <% if(!currUser) { %>
                     <div class="d-grid gap-2 col-6 mx-auto">
-                        <button type="submit" class="btn btn-dark add-btn" disabled>Add to Cart</button>
+                        <button type="submit" class="btn btn-success add-btn" disabled>Add to Cart</button>
                     </div>
                 <% } %>                
             </form>
@@ -155,10 +165,10 @@
         <br>
 
         <% if(currUser && item.owner._id.equals(currUser._id)) { %>
-            <a href="/items/<%=item._id%>/edit" style="width: 80px;" class="btn btn-dark add-btn">Edit</a>
+            <a href="/items/<%=item._id%>/edit" class="btn btn-primary d-grid gap-2 col-6 mx-auto">Edit</a>
             <br>
             <form method="POST" action="/items/<%=item._id%>/delete?_method=DELETE">
-                <button class="btn btn-dark" style="width: 80px;">Delete</button>
+                <button class="btn btn-danger d-grid gap-2 col-6 mx-auto">Delete</button>
             </form>
             <br>
         <% } %>

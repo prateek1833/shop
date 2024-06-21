@@ -27,7 +27,7 @@
                 <label for="image" class="form-label">Upload New Image</label>
                 <input type="file" name="image" class="form-control">
             </div>
-            <div class="mb-3">
+            <div class="mb-3" style="border: solid rgb(180, 179, 179); border-width: 1px; border-radius: 10%; padding: 5%;">
                 <label for="detail" class="form-label">Details</label>
                 <div id="detail-container">
                     <% item.detail.forEach((detail, index) => { %>
@@ -39,6 +39,9 @@
                             <div class="col">
                                 <label for="price-<%= index %>" class="form-label">Price</label>
                                 <input type="number" name="detail[<%= index %>][price]" value="<%= detail.price %>" class="form-control" required>
+                            </div>
+                            <div class="col-auto d-flex align-items-end">
+                                <button type="button" class="btn btn-danger btn-sm delete-detail">Delete</button>
                             </div>
                         </div>
                     <% }) %>
@@ -71,7 +74,19 @@
                 <label for="price-${index}" class="form-label">Price</label>
                 <input type="number" name="detail[${index}][price]" class="form-control" required>
             </div>
+            <div class="col-auto d-flex align-items-end">
+                <button type="button" class="btn btn-danger btn-sm delete-detail">Delete</button>
+            </div>
         `;
         container.appendChild(detailItem);
+        addDeleteEventListener(detailItem.querySelector('.delete-detail'));
     });
+
+    function addDeleteEventListener(button) {
+        button.addEventListener('click', function() {
+            button.closest('.detail-item').remove();
+        });
+    }
+
+    document.querySelectorAll('.delete-detail').forEach(addDeleteEventListener);
 </script>

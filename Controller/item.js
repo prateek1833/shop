@@ -131,27 +131,42 @@ module.exports.update = async (req, res) => {
     // Convert key from a comma-separated string to an array
     const keywords = key.split(',').map(keyword => keyword.trim());
 
-    // Find and update the item
-    let item = await Item.findByIdAndUpdate(id, {
-        title,
-        description,
-        category,
-        unit,
-        detail,  // Assuming detail is correctly formatted as an array of objects { price, typ }
-        key: keywords,
-    }, { new: true });  // The { new: true } option returns the updated document
+    // Find the existing item
+    let item = await Item.findById(id);
+
+    // Update the item details
+    item.title = title;
+    item.description = description;
+    item.category = category;
+    item.unit = unit;
+
+    // Extract existing details and update with new details
+    if (Array.isArray(detail)) {
+        item.detail = detail.map(d => ({
+            typ: d.typ,
+            price: d.price
+        }));
+    } else if (detail) {
+        item.detail = [{ typ: detail.typ, price: detail.price }];
+    }
+
+    // Update keywords
+    item.key = keywords;
 
     // Handle image upload
     if (req.file) {
         let url = req.file.path;
         let filename = req.file.filename;
         item.image = { url, filename };
-        await item.save();
     }
+
+    // Save the updated item
+    await item.save();
 
     req.flash("success", "Item Updated");
     res.redirect(`/items/${id}/show.ejs`);
 };
+
 
 
 module.exports.destroyItem = async (req, res) => {
